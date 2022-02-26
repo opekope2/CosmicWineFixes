@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using ClientPlugin.GUI;
 using HarmonyLib;
 using Sandbox.Graphics.GUI;
@@ -15,7 +17,7 @@ namespace ClientPlugin
     // ReSharper disable once UnusedType.Global
     public class Plugin : IPlugin, ICommonPlugin
     {
-        public const string Name = "PluginTemplate";
+        public const string Name = "SeThreadingFixes";
         public static Plugin Instance { get; private set; }
 
         public long Tick { get; private set; }
@@ -30,6 +32,10 @@ namespace ClientPlugin
         private static readonly object InitializationMutex = new object();
         private static bool initialized;
         private static bool failed;
+
+        private bool stopThread = false;
+        private Thread staThread;
+        private Queue<Action> threadActionQueue = new Queue<Action>();
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
         public void Init(object gameInstance)
@@ -56,7 +62,10 @@ namespace ClientPlugin
         {
             try
             {
-                // TODO: Save state and close resources here, called when the game exists (not guaranteed!)
+                Log.Debug("Stopping STAThread");
+                stopThread = true;
+                staThread.Join();
+                Log.Debug("Stopped STAThread");
                 // IMPORTANT: Do NOT call harmony.UnpatchAll() here! It may break other plugins.
             }
             catch (Exception ex)
@@ -111,14 +120,33 @@ namespace ClientPlugin
 
         private void Initialize()
         {
-            // TODO: Put your one time initialization code here. It is executed on first update, not on loading the plugin.
+            Log.Debug("Starting STAThread");
+            staThread = new Thread(() =>
+            {
+                while (!stopThread)
+                {
+                    while (threadActionQueue.Count > 0)
+                    {
+                        Log.Debug("Executing action on STAThread");
+                        Action a = threadActionQueue.Dequeue();
+                        a?.Invoke();
+                    }
+                    Thread.Sleep(Config.ThreadExecutionIntervalMs);
+                }
+            });
+            staThread.SetApartmentState(ApartmentState.STA);
+            staThread.Start();
         }
 
         private void CustomUpdate()
         {
-            // TODO: Put your update code here. It is called on every simulation frame!
+            // Nothing to do in every tick
         }
 
+        public void ExecuteActionOnStaThread(Action action)
+        {
+            threadActionQueue.Enqueue(action);
+        }
 
         // ReSharper disable once UnusedMember.Global
         public void OpenConfigDialog()

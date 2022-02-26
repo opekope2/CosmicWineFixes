@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace Shared.Config
 {
-    public class PluginConfig: IPluginConfig
+    public class PluginConfig : IPluginConfig
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -30,7 +30,8 @@ namespace Shared.Config
         }
 
         private bool enabled = true;
-        // TODO: Implement your config fields
+        private int threadExecutionIntervalMs = 50;
+        private bool enableClipboardFix = true;
 
         public bool Enabled
         {
@@ -38,7 +39,17 @@ namespace Shared.Config
             set => SetValue(ref enabled, value);
         }
 
-        // TODO: Encapsulate them as properties
+        public int ThreadExecutionIntervalMs
+        {
+            get => threadExecutionIntervalMs;
+            set => SetValue(ref threadExecutionIntervalMs, value);
+        }
+
+        public bool EnableClipboardFix
+        {
+            get => enableClipboardFix;
+            set => SetValue(ref enableClipboardFix, value);
+        }
     }
 }
 
