@@ -9,6 +9,6 @@ namespace Shared.Config
 
         int ThreadExecutionIntervalMs { get; set; }
 
-        bool EnableClipboardFix { get; set; }
+        int MaxCopyRetries { get; set; }
     }
 }

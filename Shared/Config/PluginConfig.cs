@@ -29,7 +29,7 @@ namespace Shared.Config
 
         private bool enabled = true;
         private int threadExecutionIntervalMs = 50;
-        private bool enableClipboardFix = true;
+        private int maxCopyRetries = 5;
 
         public bool Enabled
         {
@@ -43,10 +43,10 @@ namespace Shared.Config
             set => SetValue(ref threadExecutionIntervalMs, value);
         }
 
-        public bool EnableClipboardFix
+        public int MaxCopyRetries
         {
-            get => enableClipboardFix;
-            set => SetValue(ref enableClipboardFix, value);
+            get => maxCopyRetries;
+            set => SetValue(ref maxCopyRetries, value);
         }
     }
 }

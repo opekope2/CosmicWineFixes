@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>SeClipboardFix</AssemblyName>
     <TargetFramework>net48</TargetFramework>
@@ -23,7 +23,7 @@
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
   <ItemGroup>
     <PackageReference Include="Lib.Harmony" Version="2.2.0" />
-    <!-- This allows targeting .NET Framework from .NET Core/.NET 5+ -->
+    <!-- This allows targeting .NET Framework -->
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>

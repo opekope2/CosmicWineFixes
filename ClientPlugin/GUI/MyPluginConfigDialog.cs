@@ -23,8 +23,8 @@ namespace ClientPlugin.GUI
         private MyGuiControlLabel threadDelayLabel;
         private MyGuiControlSlider threadDelaySlider;
 
-        private MyGuiControlLabel clipboardEnabledLabel;
-        private MyGuiControlCheckbox clipboardEnabledCheckbox;
+        private MyGuiControlLabel clipboardRetriesLabel;
+        private MyGuiControlSlider clipboardRetriesSlider;
 
         private MyGuiControlButton closeButton;
 
@@ -71,14 +71,15 @@ namespace ClientPlugin.GUI
                 config.ThreadExecutionIntervalMs,
                 value => config.ThreadExecutionIntervalMs = value,
                 "Loop execution delay",
-                config.ThreadExecutionIntervalMs + " ms");
+                " ms");
 
-            CreateCheckbox(out clipboardEnabledLabel,
-                out clipboardEnabledCheckbox,
-                config.EnableClipboardFix,
-                value => config.EnableClipboardFix = value,
-                "Enable clipboard fix (Ctrl+C)",
-                "If your game freezes when you press Ctrl+C for the 2nd time and onward, check this, THEN RESTART YOUR GAME");
+            CreateSlider(out clipboardRetriesLabel,
+                out clipboardRetriesSlider,
+                1,
+                10,
+                config.MaxCopyRetries,
+                value => config.MaxCopyRetries = value,
+                "Copy to clipboard max retries");
 
             closeButton = new MyGuiControlButton(originAlign: MyGuiDrawAlignEnum.HORISONTAL_RIGHT_AND_VERTICAL_CENTER, text: MyTexts.Get(MyCommonTexts.Ok), onButtonClick: OnOk);
         }
@@ -102,7 +103,7 @@ namespace ClientPlugin.GUI
             checkboxControl.IsCheckedChanged += cb => store(cb.IsChecked);
         }
 
-        private void CreateSlider(out MyGuiControlLabel labelControl, out MyGuiControlSlider sliderControl, int minValue, int maxValue, int value, Action<int> store, string label, string tooltip)
+        private void CreateSlider(out MyGuiControlLabel labelControl, out MyGuiControlSlider sliderControl, int minValue, int maxValue, int value, Action<int> store, string label, string tooltipPostfix = "")
         {
             labelControl = new MyGuiControlLabel
             {
@@ -110,7 +111,7 @@ namespace ClientPlugin.GUI
                 OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_CENTER_AND_VERTICAL_TOP
             };
 
-            sliderControl = new MyGuiControlSlider(toolTip: tooltip, width: 0.25f)
+            sliderControl = new MyGuiControlSlider(toolTip: value + tooltipPostfix, width: 0.25f)
             {
                 OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_CENTER_AND_VERTICAL_TOP,
                 Enabled = true,
@@ -122,7 +123,7 @@ namespace ClientPlugin.GUI
             sliderControl.ValueChanged += sl =>
             {
                 store((int)sl.Value);
-                sl.SetToolTip(sl.Value + " ms");
+                sl.SetToolTip(sl.Value + tooltipPostfix);
             };
         }
 
@@ -143,8 +144,8 @@ namespace ClientPlugin.GUI
             layoutTable.Add(threadDelaySlider, MyAlignH.Left, MyAlignV.Center, row, 1);
             row++;
 
-            layoutTable.Add(clipboardEnabledLabel, MyAlignH.Left, MyAlignV.Center, row, 0);
-            layoutTable.Add(clipboardEnabledCheckbox, MyAlignH.Left, MyAlignV.Center, row, 1);
+            layoutTable.Add(clipboardRetriesLabel, MyAlignH.Left, MyAlignV.Center, row, 0);
+            layoutTable.Add(clipboardRetriesSlider, MyAlignH.Left, MyAlignV.Center, row, 1);
             row++;
 
 

@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using HarmonyLib;
 using Shared.Config;
@@ -21,17 +22,29 @@ namespace Shared.Patches
         [HarmonyPatch(nameof(MyClipboardHelper.SetClipboard))]
         private static bool SetClipboardPrefix(ref string text)
         {
-            if (!Config.Enabled || !Config.EnableClipboardFix)
+            if (!Config.Enabled)
             {
                 return true;
             }
 
             string localText = text;
+            int retries = Config.MaxCopyRetries;
             Plugin.ExecuteActionOnStaThread(() =>
             {
                 Log.Debug("Copying text to clipboard via fix");
-                Clipboard.Clear();
-                Clipboard.SetText(localText);
+                for (int i = 0; i < retries; i++)
+                {
+                    try
+                    {
+                        Clipboard.Clear();
+                        Clipboard.SetText(localText);
+                        return;
+                    }
+                    catch (ExternalException)
+                    {
+                        Log.Info($"Failed to copy to clipboard ({i}/{retries})");
+                    }
+                }
             });
 
             // Don't run the original method, run this fixed implementation instead
