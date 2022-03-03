@@ -17,7 +17,7 @@ namespace ClientPlugin
     // ReSharper disable once UnusedType.Global
     public class Plugin : IPlugin, ICommonPlugin
     {
-        public const string Name = "SeThreadingFixes";
+        public const string Name = "SeClipboardFix";
         public static Plugin Instance { get; private set; }
 
         public long Tick { get; private set; }
@@ -44,7 +44,7 @@ namespace ClientPlugin
 
             Log.Info("Loading");
 
-            var configPath = Path.Combine(MyFileSystem.UserDataPath, ConfigFileName);
+            var configPath = Path.Combine(MyFileSystem.UserDataPath, "Storage", ConfigFileName);
             config = PersistentConfig<PluginConfig>.Load(Log, configPath);
 
             Common.SetPlugin(this);

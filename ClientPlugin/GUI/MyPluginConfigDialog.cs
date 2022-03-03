@@ -12,7 +12,7 @@ namespace ClientPlugin.GUI
 
     public class MyPluginConfigDialog : MyGuiScreenBase
     {
-        private const string Caption = "Configure Threading Fixes";
+        private const string Caption = "Configure Clipboard Fix";
         public override string GetFriendlyName() => "MyPluginConfigDialog";
 
         private MyLayoutTable layoutTable;

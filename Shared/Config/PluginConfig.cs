@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-#if !TORCH
-
 namespace Shared.Config
 {
     public class PluginConfig : IPluginConfig
@@ -52,5 +50,3 @@ namespace Shared.Config
         }
     }
 }
-
-#endif

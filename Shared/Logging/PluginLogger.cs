@@ -1,4 +1,3 @@
-#if !TORCH
 using System;
 using System.Runtime.CompilerServices;
 using VRage.Utils;
@@ -110,5 +109,3 @@ namespace Shared.Logging
         }
     }
 }
-
-#endif
