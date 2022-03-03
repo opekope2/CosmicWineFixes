@@ -17,11 +17,8 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetPath>$(SolutionName).dll</TargetPath>
-    <!-- Windows -->
-    <!--<PostBuildEvent>call "$(MSBuildProjectDirectory)\deploy.bat" "$(TargetPath)" "$(SolutionName)"</PostBuildEvent>-->
-    <!-- Linux -->
-    <!--<PostBuildEvent>$(MSBuildProjectDirectory)/../wineprefix-shell wineconsole "$(MSBuildProjectDirectory)/deploy.bat" "$(TargetPath)" "$(SolutionName)"</PostBuildEvent>-->
+    <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">call "$(MSBuildProjectDirectory)\deploy.bat" "$(SolutionName).dll"</PostBuildEvent>
+    <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">$(MSBuildProjectDirectory)/deploy.sh "$(SolutionName).dll"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
   <ItemGroup>
@@ -517,6 +514,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="deploy.bat" />
+    <Content Include="deploy.sh" />
     <Content Include="Kill-Space-Engineers.bat" />
     <Content Include="PluginHub.xml" />
   </ItemGroup>
