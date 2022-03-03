@@ -1,10 +1,9 @@
 @echo off
-if [%2] == [] goto EOF
+if [%1] == [] goto EOF
 
 echo Parameters: %*
 
 set SRC=%~p1
-set NAME=%~2
 
 set TARGET=..\..\..\..\Bin64\Plugins\Local
 mkdir %TARGET% >NUL 2>&1
