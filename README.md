@@ -4,7 +4,7 @@
 * I converted the csproj files to the new SDK-style csproj, so you can build it with the new .NET SDK
 * I removed the dedicated and torch plugins, because they are not needed
 
-I'll publish an updated Linux-compatible template soon
+Find my upgraded template here: [opekope2/PluginTemplate](https://github.com/opekope2/PluginTemplate)
 
 ## How to build (Windows) (not tested)
 * Install [.NET SDK](https://get.dot.net)
