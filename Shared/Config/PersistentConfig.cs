@@ -91,6 +91,7 @@ namespace Shared.Config
             // NOTE: There is a minimal chance of inconsistency here if the config data
             // is changed concurrently, but it is negligible in practice. Also, it would be
             // corrected by the next scheduled save operation after SaveDelay milliseconds.
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
             using (var text = File.CreateText(path))
                 new XmlSerializer(typeof(T)).Serialize(text, Data);
         }
