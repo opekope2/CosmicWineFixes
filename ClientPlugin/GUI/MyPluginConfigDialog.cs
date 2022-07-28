@@ -20,15 +20,21 @@ namespace ClientPlugin.GUI
         private MyGuiControlLabel enabledLabel;
         private MyGuiControlCheckbox enabledCheckbox;
 
+        private MyGuiControlLabel clipboardFixEnabledLabel;
+        private MyGuiControlCheckbox clipboardFixEnabledCheckbox;
+
         private MyGuiControlLabel threadDelayLabel;
         private MyGuiControlSlider threadDelaySlider;
 
         private MyGuiControlLabel clipboardRetriesLabel;
         private MyGuiControlSlider clipboardRetriesSlider;
 
+        private MyGuiControlLabel openLogEnabledLabel;
+        private MyGuiControlCheckbox openLogEnabledCheckbox;
+
         private MyGuiControlButton closeButton;
 
-        public MyPluginConfigDialog() : base(new Vector2(0.5f, 0.5f), MyGuiConstants.SCREEN_BACKGROUND_COLOR, new Vector2(0.8f, 0.4f), false, null, MySandboxGame.Config.UIBkOpacity, MySandboxGame.Config.UIOpacity)
+        public MyPluginConfigDialog() : base(new Vector2(0.5f, 0.5f), MyGuiConstants.SCREEN_BACKGROUND_COLOR, new Vector2(0.8f, 0.6f), false, null, MySandboxGame.Config.UIBkOpacity, MySandboxGame.Config.UIOpacity)
         {
             EnabledBackgroundFade = true;
             m_closeOnEsc = true;
@@ -57,12 +63,20 @@ namespace ClientPlugin.GUI
             AddCaption(Caption);
 
             var config = Common.Config;
+
             CreateCheckbox(out enabledLabel,
                 out enabledCheckbox,
                 config.Enabled,
                 value => config.Enabled = value,
                 "Enabled",
                 "Enables the plugin");
+
+            CreateCheckbox(out clipboardFixEnabledLabel,
+                out clipboardFixEnabledCheckbox,
+                config.ClipboardFixEnabled,
+                value => config.ClipboardFixEnabled = value,
+                "Fix clipboard",
+                "Enables the clipboard fix\nRestart the game after enabling this");
 
             CreateSlider(out threadDelayLabel,
                 out threadDelaySlider,
@@ -80,6 +94,13 @@ namespace ClientPlugin.GUI
                 config.MaxCopyRetries,
                 value => config.MaxCopyRetries = value,
                 "Copy to clipboard max retries");
+
+            CreateCheckbox(out openLogEnabledLabel,
+                out openLogEnabledCheckbox,
+                config.LogOpeningEnabled,
+                value => config.LogOpeningEnabled = value,
+                "Open log on crash",
+                "Automatically open log in notepad when the game crashes\nUseful when the log link in the crash window doesn't work");
 
             closeButton = new MyGuiControlButton(originAlign: MyGuiDrawAlignEnum.HORISONTAL_RIGHT_AND_VERTICAL_CENTER, text: MyTexts.Get(MyCommonTexts.Ok), onButtonClick: OnOk);
         }
@@ -132,12 +153,16 @@ namespace ClientPlugin.GUI
             var size = Size ?? Vector2.One;
             layoutTable = new MyLayoutTable(this, -0.3f * size, 0.6f * size);
             layoutTable.SetColumnWidths(400f, 400f);
-            layoutTable.SetRowHeights(90f, 50f, 50f, 150f, 60f);
+            layoutTable.SetRowHeights(90f, 50f, 50f, 50f, 90f, 50f, 150f);
 
             var row = 0;
 
             layoutTable.Add(enabledLabel, MyAlignH.Left, MyAlignV.Center, row, 0);
             layoutTable.Add(enabledCheckbox, MyAlignH.Left, MyAlignV.Center, row, 1);
+            row++;
+
+            layoutTable.Add(clipboardFixEnabledLabel, MyAlignH.Left, MyAlignV.Center, row, 0);
+            layoutTable.Add(clipboardFixEnabledCheckbox, MyAlignH.Left, MyAlignV.Center, row, 1);
             row++;
 
             layoutTable.Add(threadDelayLabel, MyAlignH.Left, MyAlignV.Center, row, 0);
@@ -146,6 +171,10 @@ namespace ClientPlugin.GUI
 
             layoutTable.Add(clipboardRetriesLabel, MyAlignH.Left, MyAlignV.Center, row, 0);
             layoutTable.Add(clipboardRetriesSlider, MyAlignH.Left, MyAlignV.Center, row, 1);
+            row++;
+
+            layoutTable.Add(openLogEnabledLabel, MyAlignH.Left, MyAlignV.Center, row, 0);
+            layoutTable.Add(openLogEnabledCheckbox, MyAlignH.Left, MyAlignV.Center, row, 1);
             row++;
 
 

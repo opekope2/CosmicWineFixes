@@ -7,8 +7,10 @@ namespace Shared.Config
         // Enables the plugin
         bool Enabled { get; set; }
 
+        bool ClipboardFixEnabled { get; set; }
         int ThreadExecutionIntervalMs { get; set; }
-
         int MaxCopyRetries { get; set; }
+
+        bool LogOpeningEnabled { get; set; }
     }
 }

@@ -28,13 +28,23 @@ namespace Shared.Config
         }
 
         private bool enabled = true;
+
+        private bool clipboardFixEnabled = true;
         private int threadExecutionIntervalMs = 50;
         private int maxCopyRetries = 5;
+
+        private bool logOpeningEnabled = false;
 
         public bool Enabled
         {
             get => enabled;
             set => SetValue(ref enabled, value);
+        }
+
+        public bool ClipboardFixEnabled
+        {
+            get => clipboardFixEnabled;
+            set => SetValue(ref clipboardFixEnabled, value);
         }
 
         public int ThreadExecutionIntervalMs
@@ -47,6 +57,12 @@ namespace Shared.Config
         {
             get => maxCopyRetries;
             set => SetValue(ref maxCopyRetries, value);
+        }
+
+        public bool LogOpeningEnabled
+        {
+            get => logOpeningEnabled;
+            set => SetValue(ref logOpeningEnabled, value);
         }
     }
 }

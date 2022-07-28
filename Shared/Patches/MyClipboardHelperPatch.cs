@@ -1,5 +1,3 @@
-using System;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using HarmonyLib;
@@ -17,12 +15,11 @@ namespace Shared.Patches
         private static IPluginConfig Config => Common.Config;
         public static IPluginLogger Log => Common.Logger;
 
-
         [HarmonyPrefix]
         [HarmonyPatch(nameof(MyClipboardHelper.SetClipboard))]
-        private static bool SetClipboardPrefix(ref string text)
+        private static bool SetClipboardPrefix(string text)
         {
-            if (!Config.Enabled)
+            if (!Config.Enabled || !Config.ClipboardFixEnabled)
             {
                 return true;
             }
