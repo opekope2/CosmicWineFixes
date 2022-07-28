@@ -35,6 +35,8 @@ namespace Shared.Config
 
         private bool logOpeningEnabled = false;
 
+        private bool showExitToLinux = false;
+
         public bool Enabled
         {
             get => enabled;
@@ -63,6 +65,12 @@ namespace Shared.Config
         {
             get => logOpeningEnabled;
             set => SetValue(ref logOpeningEnabled, value);
+        }
+
+        public bool ShowExitToLinux
+        {
+            get => showExitToLinux;
+            set => SetValue(ref showExitToLinux, value);
         }
     }
 }

@@ -4,7 +4,6 @@ namespace Shared.Config
 {
     public interface IPluginConfig : INotifyPropertyChanged
     {
-        // Enables the plugin
         bool Enabled { get; set; }
 
         bool ClipboardFixEnabled { get; set; }
@@ -12,5 +11,7 @@ namespace Shared.Config
         int MaxCopyRetries { get; set; }
 
         bool LogOpeningEnabled { get; set; }
+
+        bool ShowExitToLinux { get; set; }
     }
 }

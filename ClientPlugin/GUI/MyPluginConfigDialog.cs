@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using Sandbox;
 using Sandbox.Graphics.GUI;
 using Shared.Plugin;
@@ -31,6 +30,9 @@ namespace ClientPlugin.GUI
 
         private MyGuiControlLabel openLogEnabledLabel;
         private MyGuiControlCheckbox openLogEnabledCheckbox;
+
+        private MyGuiControlLabel showExitToLinuxLabel;
+        private MyGuiControlCheckbox showExitToLinuxCheckbox;
 
         private MyGuiControlButton closeButton;
 
@@ -101,6 +103,13 @@ namespace ClientPlugin.GUI
                 value => config.LogOpeningEnabled = value,
                 "Open log on crash",
                 "Automatically open log in notepad when the game crashes\nUseful when the log link in the crash window doesn't work");
+
+            CreateCheckbox(out showExitToLinuxLabel,
+                out showExitToLinuxCheckbox,
+                config.ShowExitToLinux,
+                value => config.ShowExitToLinux = value,
+                "Exit to Linux",
+                "Show Exit to Linux instead of Windows\nThis option is English-only and requires a game restart");
 
             closeButton = new MyGuiControlButton(originAlign: MyGuiDrawAlignEnum.HORISONTAL_RIGHT_AND_VERTICAL_CENTER, text: MyTexts.Get(MyCommonTexts.Ok), onButtonClick: OnOk);
         }
@@ -175,6 +184,10 @@ namespace ClientPlugin.GUI
 
             layoutTable.Add(openLogEnabledLabel, MyAlignH.Left, MyAlignV.Center, row, 0);
             layoutTable.Add(openLogEnabledCheckbox, MyAlignH.Left, MyAlignV.Center, row, 1);
+            row++;
+
+            layoutTable.Add(showExitToLinuxLabel, MyAlignH.Left, MyAlignV.Center, row, 0);
+            layoutTable.Add(showExitToLinuxCheckbox, MyAlignH.Left, MyAlignV.Center, row, 1);
             row++;
 
 
