@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
@@ -17,7 +17,7 @@ namespace ClientPlugin
     // ReSharper disable once UnusedType.Global
     public class Plugin : IPlugin, ICommonPlugin
     {
-        public const string Name = "SeClipboardFix";
+        public const string Name = "CosmicWineFixes";
         public static Plugin Instance { get; private set; }
 
         public long Tick { get; private set; }

@@ -1,4 +1,6 @@
-# SE Clipboard Fix
+# Cosmic Wine Fixes
+
+Formerly SE Clipboard Fix
 
 ## Notes about template modifications
 * I converted the csproj files to the new SDK-style csproj, so you can build it with the new .NET SDK
