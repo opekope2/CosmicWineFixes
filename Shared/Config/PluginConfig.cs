@@ -35,7 +35,7 @@ namespace Shared.Config
 
         private bool logOpeningEnabled = false;
 
-        private bool showExitToLinux = false;
+        private bool showExitToLinux = true;
 
         public bool Enabled
         {
