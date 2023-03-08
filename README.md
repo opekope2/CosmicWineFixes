@@ -29,6 +29,7 @@ Find my upgraded template here: [opekope2/PluginTemplate](https://github.com/ope
 1. Install [Plugin Loader](https://github.com/sepluginloader/PluginLoader#installation)
 2. Inable `CosmicWineFixes` in the Plugins menu
 3. Restart the game when prompted
+4. Configure fixes/modifications from Plugins menu
 
 ## The clipboard issue
 
