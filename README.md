@@ -32,6 +32,8 @@ Find my upgraded template here: [opekope2/PluginTemplate](https://github.com/ope
 
 ## The clipboard issue
 
+> Fix enabled by default
+
 This code in SE is causing the issue:
 
 ```csharp
@@ -70,6 +72,8 @@ This plugin creates a thread with the same configuration when it gets loaded the
 
 ## Open log from crash screen
 
+> Disabled by default
+
 The error shown in a dialog box:
 
 ```
@@ -89,5 +93,7 @@ Unfortunately, this can't be patched easily, because SE restarts itself after a 
 If enabled, the plugin opens the log file in `notepad.exe` automatically just before the game exits. This is the simplest solution. I haven't found an easy way to open a Linux text editor, and there are many, and they need to be detected. Windows/Wine notepad "just works".
 
 ## Exit to Linux
+
+> Disabled by default
 
 If enabled, replaces `Exit to Windows` with `Exit to Linux` in the main menu (and also, in InGameExit mod). This works only in English. In other languages, the text will not be replaced. It is planned to extract this text from all languages, feel free to help.
