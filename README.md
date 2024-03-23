@@ -93,8 +93,8 @@ Unfortunately, this can't be patched easily, because SE restarts itself after a 
 
 If enabled, the plugin opens the log file in `notepad.exe` automatically just before the game exits. This is the simplest solution. I haven't found an easy way to open a Linux text editor, and there are many, and they need to be detected. Windows/Wine notepad "just works".
 
-## Exit to Linux
+## Exit to GNU+Linux
 
 > Disabled by default
 
-If enabled, replaces `Exit to Windows` with `Exit to Linux` in the main menu (and also, in InGameExit mod). This works only in English. In other languages, the text will not be replaced. It is planned to extract this text from all languages, feel free to help.
+If enabled, replaces `Exit to Windows` with `Exit to GNU+Linux` in the main menu (and also, in InGameExit mod). This works only in English. In other languages, the text will not be replaced. It is planned to extract this text from all languages, feel free to help.
