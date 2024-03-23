@@ -23,14 +23,14 @@ namespace Shared.Patches
 
             if (value == "Exit to Windows")
             {
-                value = "Exit to Linux";
+                value = "Exit to GNU+Linux";
                 length = value.Length;
             }
 
             // InGameExit mod
             if (value == "Exit To Windows")
             {
-                value = "Exit To Linux";
+                value = "Exit To GNU+Linux";
                 length = value.Length;
             }
 

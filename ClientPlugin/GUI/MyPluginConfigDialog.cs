@@ -108,8 +108,8 @@ namespace ClientPlugin.GUI
                 out showExitToLinuxCheckbox,
                 config.ShowExitToLinux,
                 value => config.ShowExitToLinux = value,
-                "Exit to Linux",
-                "Show Exit to Linux instead of Windows\nThis option is English-only and requires a game restart");
+                "Exit to GNU+Linux",
+                "Show Exit to GNU+Linux instead of Windows\nThis option is English-only and requires a game restart");
 
             closeButton = new MyGuiControlButton(originAlign: MyGuiDrawAlignEnum.HORISONTAL_RIGHT_AND_VERTICAL_CENTER, text: MyTexts.Get(MyCommonTexts.Ok), onButtonClick: OnOk);
         }
